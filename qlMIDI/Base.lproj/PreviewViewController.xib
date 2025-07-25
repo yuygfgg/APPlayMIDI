@@ -10,9 +10,12 @@
             <connections>
                 <outlet property="currentPlaybackTimeLabel" destination="OgE-g1-pVW" id="gnM-dr-x99"/>
                 <outlet property="filenameLabel" destination="pL7-zz-Pqf" id="dn2-Qg-Eid"/>
+                <outlet property="finderCurrentTime" destination="finderCurrentTime" id="finderCurrentTime-connection"/>
+                <outlet property="finderFilename" destination="finderFilename" id="finderFilename-connection"/>
                 <outlet property="finderPlayButton" destination="erB-wW-bGz" id="FQe-AC-Jrt"/>
-                <outlet property="finderProgressCircle" destination="6VG-LD-LgJ" id="BCY-Vn-2a7"/>
+                <outlet property="finderProgressSlider" destination="6VG-LD-LgJ" id="BCY-Vn-2a7"/>
                 <outlet property="finderRestartButton" destination="UyJ-nQ-cMI" id="UjP-4y-E42"/>
+                <outlet property="finderTotalTime" destination="finderTotalTime" id="finderTotalTime-connection"/>
                 <outlet property="finderView" destination="ujf-OL-MyH" id="QsQ-Tj-6Rm"/>
                 <outlet property="playButton" destination="kgX-sW-HT8" id="ueR-Nt-Avj"/>
                 <outlet property="quickLookView" destination="bOk-7t-w87" id="OhG-a5-Ieb"/>
@@ -64,11 +67,12 @@
                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="a4A-oa-JsI" userLabel="progressbar view">
                             <rect key="frame" x="20" y="74" width="610" height="58"/>
                             <subviews>
-                                <progressIndicator horizontalCompressionResistancePriority="250" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="w6L-AA-SsK">
-                                    <rect key="frame" x="60" y="19" width="490" height="20"/>
-                                </progressIndicator>
+                                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w6L-AA-SsK">
+                                    <rect key="frame" x="58" y="14" width="494" height="28"/>
+                                    <sliderCell key="cell" continuous="YES" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="below" sliderType="linear" id="w6L-AA-SsK-cell"/>
+                                </slider>
                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dtx-ky-YSl" userLabel="totalTime">
-                                    <rect key="frame" x="560" y="22" width="52" height="16"/>
+                                    <rect key="frame" x="560" y="24" width="52" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="L37-fk-us4"/>
                                     </constraints>
@@ -79,7 +83,7 @@
                                     </textFieldCell>
                                 </textField>
                                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OgE-g1-pVW" userLabel="currentTime">
-                                    <rect key="frame" x="-2" y="21" width="52" height="16"/>
+                                    <rect key="frame" x="-2" y="22" width="52" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="qO5-4i-T8S"/>
                                     </constraints>
@@ -122,11 +126,11 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="ujf-OL-MyH" userLabel="Finder View">
                     <rect key="frame" x="0.0" y="27" width="650" height="250"/>
                     <subviews>
-                        <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" spacing="35" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="xpt-Iw-9Y7">
-                            <rect key="frame" x="286" y="-78" width="78" height="280"/>
+                        <stackView distribution="equalCentering" orientation="vertical" alignment="centerX" spacing="20" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="xpt-Iw-9Y7">
+                            <rect key="frame" x="240" y="-4" width="170" height="214"/>
                             <subviews>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="erB-wW-bGz" userLabel="playButton">
-                                    <rect key="frame" x="19" y="240" width="40" height="40"/>
+                                    <rect key="frame" x="65" y="174" width="40" height="40"/>
                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Play" imagePosition="only" alignment="center" alternateImage="Pause" imageScaling="proportionallyUpOrDown" inset="2" id="7Pb-iU-waJ">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
@@ -137,7 +141,7 @@
                                     </constraints>
                                 </button>
                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="UyJ-nQ-cMI" userLabel="restartButton">
-                                    <rect key="frame" x="19" y="118" width="40" height="40"/>
+                                    <rect key="frame" x="65" y="112" width="40" height="40"/>
                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="BacktoPreview" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="NoP-7l-93V">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
@@ -147,15 +151,68 @@
                                         <constraint firstAttribute="width" constant="40" id="tza-u9-aMc"/>
                                     </constraints>
                                 </button>
-                                <progressIndicator maxValue="100" doubleValue="65" style="spinning" id="6VG-LD-LgJ">
-                                    <rect key="frame" x="23" y="0.0" width="32" height="32"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                </progressIndicator>
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="finderProgressView" userLabel="Progress View">
+                                    <rect key="frame" x="0.0" y="47" width="170" height="45"/>
+                                    <subviews>
+                                        <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6VG-LD-LgJ">
+                                            <rect key="frame" x="45" y="-3" width="154" height="32"/>
+                                            <sliderCell key="cell" continuous="YES" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="below" sliderType="linear" id="6VG-LD-LgJ-cell"/>
+                                        </slider>
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="finderCurrentTime">
+                                            <rect key="frame" x="-2" y="3" width="39" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="finderCurrentTime-width"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="0:00" id="finderCurrentTimeCell">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="finderTotalTime">
+                                            <rect key="frame" x="207" y="3" width="39" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="finderTotalTime-width"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="3:00" id="finderTotalTimeCell">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="finderCurrentTime" firstAttribute="bottom" secondItem="6VG-LD-LgJ" secondAttribute="bottom" id="currentTime-bottom"/>
+                                        <constraint firstItem="finderCurrentTime" firstAttribute="leading" secondItem="finderProgressView" secondAttribute="leading" id="currentTime-leading"/>
+                                        <constraint firstAttribute="height" constant="45" id="finderProgressView-height"/>
+                                        <constraint firstAttribute="width" constant="170" id="finderProgressView-width"/>
+                                        <constraint firstItem="6VG-LD-LgJ" firstAttribute="centerY" secondItem="finderProgressView" secondAttribute="centerY" constant="7.5" id="progress-centerY"/>
+                                        <constraint firstItem="6VG-LD-LgJ" firstAttribute="height" constant="24" id="progress-height"/>
+                                        <constraint firstItem="6VG-LD-LgJ" firstAttribute="leading" secondItem="finderCurrentTime" secondAttribute="trailing" constant="12" id="progress-leading"/>
+                                        <constraint firstItem="6VG-LD-LgJ" firstAttribute="width" constant="150" id="progress-width"/>
+                                        <constraint firstItem="finderTotalTime" firstAttribute="bottom" secondItem="6VG-LD-LgJ" secondAttribute="bottom" id="totalTime-bottom"/>
+                                        <constraint firstItem="finderTotalTime" firstAttribute="leading" secondItem="6VG-LD-LgJ" secondAttribute="trailing" constant="12" id="totalTime-leading"/>
+                                        <constraint firstAttribute="trailing" secondItem="finderTotalTime" secondAttribute="trailing" id="totalTime-trailing"/>
+                                    </constraints>
+                                </customView>
+                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="finderFilename">
+                                    <rect key="frame" x="33" y="0.0" width="104" height="14"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="170" id="finderFilename-maxWidth"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="finderFilename-minWidth"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="center" title="song.mid" id="finderFilenameCell">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="YxI-DK-brz"/>
+                                <constraint firstAttribute="width" constant="170" id="YxI-DK-brz"/>
                             </constraints>
                             <visibilityPriorities>
+                                <integer value="1000"/>
                                 <integer value="1000"/>
                                 <integer value="1000"/>
                                 <integer value="1000"/>
@@ -164,11 +221,12 @@
                                 <real value="3.4028234663852886e+38"/>
                                 <real value="3.4028234663852886e+38"/>
                                 <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
                             </customSpacing>
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="xpt-Iw-9Y7" firstAttribute="top" secondItem="ujf-OL-MyH" secondAttribute="top" constant="48" id="0ts-qL-hXB"/>
+                        <constraint firstItem="xpt-Iw-9Y7" firstAttribute="top" secondItem="ujf-OL-MyH" secondAttribute="top" constant="40" id="0ts-qL-hXB"/>
                         <constraint firstItem="xpt-Iw-9Y7" firstAttribute="centerX" secondItem="ujf-OL-MyH" secondAttribute="centerX" id="a6n-KL-tYJ"/>
                         <constraint firstAttribute="height" constant="250" id="yl2-Ta-3PM"/>
                     </constraints>

@@ -46,7 +46,8 @@ class Document: NSDocument {
  //   }
     
     override func read(from data: Data, ofType typeName: String) throws {
-        self.theMIDIPlayer = try AVMIDIPlayer.init(data: data, soundBankURL: nil)
+        let soundbankURL = SettingsManager.shared.soundbankURL
+        self.theMIDIPlayer = try AVMIDIPlayer.init(data: data, soundBankURL: soundbankURL)
         self.myData = data
         if self.theMIDIPlayer == nil {
              throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)

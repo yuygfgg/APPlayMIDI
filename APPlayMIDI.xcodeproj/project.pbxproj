@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		636973122E332D0C00D3D908 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636973102E332D0C00D3D908 /* SettingsManager.swift */; };
+		636973132E332D0C00D3D908 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636973112E332D0C00D3D908 /* SettingsWindowController.swift */; };
 		B5051869230C2C9E0024884E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5051868230C2C9E0024884E /* AppDelegate.swift */; };
 		B505186B230C2C9E0024884E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B505186A230C2C9E0024884E /* ViewController.swift */; };
 		B505186D230C2C9E0024884E /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = B505186C230C2C9E0024884E /* Document.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		636973102E332D0C00D3D908 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		636973112E332D0C00D3D908 /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		B5051865230C2C9E0024884E /* APPlayMIDI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APPlayMIDI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5051868230C2C9E0024884E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B505186A230C2C9E0024884E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				B5051868230C2C9E0024884E /* AppDelegate.swift */,
+				636973102E332D0C00D3D908 /* SettingsManager.swift */,
+				636973112E332D0C00D3D908 /* SettingsWindowController.swift */,
 				B505186A230C2C9E0024884E /* ViewController.swift */,
 				B505186C230C2C9E0024884E /* Document.swift */,
 				B505186E230C2C9F0024884E /* Assets.xcassets */,
@@ -246,6 +252,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B505186B230C2C9E0024884E /* ViewController.swift in Sources */,
+				636973122E332D0C00D3D908 /* SettingsManager.swift in Sources */,
+				636973132E332D0C00D3D908 /* SettingsWindowController.swift in Sources */,
 				B560A51D235F7B71007C9033 /* WindowController.swift in Sources */,
 				B5051869230C2C9E0024884E /* AppDelegate.swift in Sources */,
 				B505186D230C2C9E0024884E /* Document.swift in Sources */,
